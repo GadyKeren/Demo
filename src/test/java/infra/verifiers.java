@@ -1,4 +1,4 @@
-package infra.homePage.pageVerifiers;
+package infra;
 
 import infra.homePage.pageObjects.homePage;
 import org.openqa.selenium.By;
@@ -13,14 +13,17 @@ import java.util.function.Function;
 /**
  * Created by Kerens on 30/04/2017.
  */
-public class pageVerifiers {
+public class verifiers extends baseClass{
 
     protected WebDriver driver;
     private By loginUserdataForm = By.id("loginUserdataForm");
 
-    public pageVerifiers(WebDriver driver) {
+    public verifiers() {
+        this.driver=getDriver();
+    }
 
-        this.driver = driver;
+    public verifiers(WebDriver driver) {
+        this.driver=driver;
     }
 
     public boolean isVisible (WebElement expextedWebElement){

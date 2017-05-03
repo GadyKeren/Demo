@@ -22,18 +22,19 @@ import java.net.URL;
 
 //http://www.seleniumeasy.com/selenium-tutorials/simple-page-object-model-framework-example
 
-public class baseTestClass {
+public class baseClass {
 
     private WebDriver driver;
     private Eyes eyes;
 
     static String driverPath = "C:" + "\\" + "Program Files" + "\\" + "Selenium" + "\\"; //C:\Program Files\Selenium
 
+
     public WebDriver getDriver() {
         return driver;
     }
 
-    public Eyes getEyss(){
+    public Eyes getEyes(){
         return eyes;
     }
 
@@ -79,6 +80,8 @@ public class baseTestClass {
         eyes.open(driver, "Applitools", "Test Web Page", new RectangleSize(1024, 768));
         return eyes;
     }
+
+
 
     //@Parameterized.Parameters({ "browserType", "appURL" })
     @Before

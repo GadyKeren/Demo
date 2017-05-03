@@ -1,9 +1,9 @@
 package tests;
 
 import com.applitools.eyes.selenium.Eyes;
+import infra.baseClass;
 import infra.homePage.pageObjects.homePage;
-import infra.baseTestClass;
-import infra.homePage.pageVerifiers.pageVerifiers;
+import infra.verifiers;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 
@@ -11,35 +11,41 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by Kerens on 30/04/2017.
  */
-public class HomePageTest extends baseTestClass {
+public class HomePageTest extends baseClass {
 
     private WebDriver driver;
     private Eyes eyes;
 
     @Before
     public void setUp() {
-        driver=getDriver();
-        eyes=getEyss();
+        driver = getDriver();
+        eyes = getEyes();
     }
 
-    @Test //TBD
-    public void movingToLoginPageWhenClickingTheLoginLink() {
-        driver.navigate().to("https://www.lufthansa.com/");
-        System.out.println("Home page test...");
-        homePage homePage = new homePage(driver);
-        homePage.clickLoginBtn();
-        Assert.assertTrue(homePage.verifyBasePageTitle("Home page title doesn't match"));
-//        Assert.assertTrue(homePage.verifyTitleText("Home page title doesn't match"));
-    }
 
     @Test
     public void pageTitleTest() {
-        driver.navigate().to("https://www.lufthansa.com/");
+        driver.navigate().to("http://booking.uz.gov.ua/en/");
         System.out.println("Checking for the page title...");
-        pageVerifiers hpVer = new pageVerifiers(driver);
-        hpVer.waitForPageLoad();
-        Assert.assertTrue("Home page title doesn't match", hpVer.verifyTitleText(
-                "Book flights, offers, Miles & More and more - Lufthansa ® Germany", driver));
+        verifiers verifiers = new verifiers(driver);
+        verifiers.waitForPageLoad();
+        Assert.assertTrue("Home page title doesn't match", verifiers.verifyTitleText(
+                "Покупка - Online reservation and purchase tickets - Ukrzaliznytsia", driver));
     }
+
+    @Test
+    public void verifyTrainSelection(){
+        driver.navigate().to("http://booking.uz.gov.ua/en/ ");
+        homePage hp = new homePage(driver);
+        verifiers verifiers = new verifiers(driver);
+        verifiers.waitForPageLoad();
+        hp.setDepartureLocation("Kievska", true, true, false);
+        hp.setDestinationLocation("Debaltseve", true);
+        hp.pressSearchButton();
+        //Assert.assertTrue("Incorrect trains availability message",  hp.getTrainAvailblityMessage());
+        Assert.assertEquals(hp.getTrainAvailblityMessage(), "Incorrect trains availability message");
+    }
+
+
 
 }
