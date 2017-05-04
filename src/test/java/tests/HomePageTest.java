@@ -5,6 +5,7 @@ import infra.baseClass;
 import infra.homePage.pageObjects.homePage;
 import infra.verifiers;
 import org.junit.*;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 
@@ -39,8 +40,10 @@ public class HomePageTest extends baseClass {
         homePage hp = new homePage(driver);
         verifiers verifiers = new verifiers(driver);
         verifiers.waitForPageLoad();
-        hp.setDepartureLocation("Kievska", true, true, false);
-        hp.setDestinationLocation("Debaltseve", true);
+        hp.setDepartureLocation("Kievskaia", true, true, false);
+        hp.setDestinationLocation("Kiana", true);
+        hp.closeSelectDatesDialog();
+        ((JavascriptExecutor) driver).executeScript("scroll(0,300)");
         hp.pressSearchButton();
         //Assert.assertTrue("Incorrect trains availability message",  hp.getTrainAvailblityMessage());
         Assert.assertEquals(hp.getTrainAvailblityMessage(), "Incorrect trains availability message");

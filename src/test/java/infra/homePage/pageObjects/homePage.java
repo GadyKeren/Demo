@@ -24,6 +24,7 @@ public class homePage {
     private By searchButton = By.cssSelector("button[name=\"search\"]");
     private By departureKievskaiaFromSelectionList = By.cssSelector("#ui-id-3");
     private By destinationDebaltseveFromSelectionList = By.cssSelector("#ui-id-5");
+    private By datesDialog = By.id("ui-datepicker-div");
 
 
     public homePage(WebDriver driver) {
@@ -74,8 +75,9 @@ public class homePage {
             //departure.sendKeys(Keys.ARROW_DOWN);
             //departure.click();
             //departure.sendKeys(Keys.ESCAPE);
-            departure.sendKeys(Keys.RETURN);
+            //departure.sendKeys(Keys.RETURN);
             //clickOnIteminSelectionList(departureKievskaiaFromSelectionList);
+            departure.sendKeys(Keys.TAB);
         }
         else if (moveToDestinationField) {
             departure.sendKeys(Keys.TAB);
@@ -97,9 +99,10 @@ public class homePage {
             //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);//Really bad practice!
             //destination.sendKeys(Keys.ARROW_DOWN);
             //destination.click();
-            destination.sendKeys(Keys.ESCAPE);
+            //destination.sendKeys(Keys.ESCAPE);
             //destination.sendKeys(Keys.RETURN);
             //clickOnIteminSelectionList(destinationDebaltseveFromSelectionList);
+            destination.sendKeys(Keys.TAB);
         }
     }
 
@@ -117,13 +120,20 @@ public class homePage {
         searchBtn.click();
     }
 
+    public void closeSelectDatesDialog(){
+        //driver.switchTo().frame(driver.findElement(datesDialog));
+        WebElement selectDateDialog = driver.findElement(datesDialog);
+        selectDateDialog.click();
+        //selectDateDialog.sendKeys(Keys.ESCAPE);
+    }
+
     public String getTrainAvailblityMessage(){
         WebElement trainAvailabilityMessage = driver.findElement(trainsNotFoundField);
         return trainAvailabilityMessage.getText();
     }
 
     public void clickOnIteminSelectionList(By itemSelected){
-        WebElement selectionList = driver.findElement(By.cssSelector(String.valueOf(itemSelected)));
+        WebElement selectionList = driver.findElement(itemSelected);
         selectionList.click();
     }
 //    public boolean verifyBasePageTitle(String expectedPageTitle ) {

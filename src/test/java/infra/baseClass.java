@@ -82,7 +82,6 @@ public class baseClass {
     }
 
 
-
     //@Parameterized.Parameters({ "browserType", "appURL" })
     @Before
 //    public void initializeTestBaseSetup(String browserType, String appURL){
