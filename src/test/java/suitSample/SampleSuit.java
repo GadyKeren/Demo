@@ -5,7 +5,6 @@ import org.junit.runners.Suite;
 import tests.HomePageTest;
 import tests.visualTest;
 
-public class sampleSuit {
 
     @RunWith(Suite.class)
 
@@ -16,4 +15,4 @@ public class sampleSuit {
 
     public class SampleSuit {
     }
-}
+
