@@ -3,24 +3,10 @@ package infra;
 import com.applitools.eyes.RectangleSize;
 import com.applitools.eyes.selenium.Eyes;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-
-/**
- * Created by Kerens on 30/04/2017.
- */
-
-//http://www.seleniumeasy.com/selenium-tutorials/simple-page-object-model-framework-example
 
 public class baseClass {
 
@@ -71,13 +57,13 @@ public class baseClass {
         return driver;
     }
 
-    private Eyes setEyes(){
+    private Eyes initEyes(){
         eyes = new Eyes();
         // This is your api key, make sure you use it in all your tests.
         eyes.setApiKey("ZEdZCu103x105Vz4Qu45Gv3rej8tbWWkIQ6isdq8Xf2DPjA110");
         // Start visual testing with browser viewport set to 1024x768.
         // Make sure to use the returned driver from this point on.
-        eyes.open(driver, "Applitools", "Test Web Page", new RectangleSize(1024, 768));
+        eyes.open(driver, "Applitools", "Test Web Page", new RectangleSize(800, 600));
         return eyes;
     }
 
@@ -87,15 +73,17 @@ public class baseClass {
 //    public void initializeTestBaseSetup(String browserType, String appURL){
 //        try {
 //            setDriver(browserType, appURL);
+//            initEyes();
 //
 //        } catch (Exception e) {
 //            System.out.println("Error....." + e.getStackTrace());
 //        }
 //    }
+
     public  void initializeTestBaseSetup(){
         try {
             setDriver("chrome", "http:" + "\\" + "blank");
-
+            initEyes();
         } catch (Exception e) {
             System.out.println("Error....." + e.getStackTrace());
         }

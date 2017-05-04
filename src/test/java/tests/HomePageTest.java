@@ -3,15 +3,11 @@ package tests;
 import com.applitools.eyes.selenium.Eyes;
 import infra.baseClass;
 import infra.homePage.pageObjects.homePage;
+import infra.actions;
 import infra.verifiers;
 import org.junit.*;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-
-/**
- * Created by Kerens on 30/04/2017.
- */
 public class HomePageTest extends baseClass {
 
     private WebDriver driver;
@@ -25,28 +21,43 @@ public class HomePageTest extends baseClass {
 
 
     @Test
-    public void pageTitleTest() {
+    public void verifyCurrctHomePagePageTitle() {
+        System.out.println("Navigating to site ...");
         driver.navigate().to("http://booking.uz.gov.ua/en/");
-        System.out.println("Checking for the page title...");
+
+        System.out.println("Waiting for page to load ...");
+        actions actions = new actions(driver);
+        actions.waitForPageLoad();
         verifiers verifiers = new verifiers(driver);
-        verifiers.waitForPageLoad();
+
+        System.out.println("Verifying title text ...");
         Assert.assertTrue("Home page title doesn't match", verifiers.verifyTitleText(
                 "Покупка - Online reservation and purchase tickets - Ukrzaliznytsia", driver));
     }
 
     @Test
-    public void verifyTrainSelection(){
+    public void verifyNoTrainsOnDirectionFlow(){
+        System.out.println("Navigating to site ...");
         driver.navigate().to("http://booking.uz.gov.ua/en/ ");
+
+        System.out.println("Waiting for page to load ...");
         homePage hp = new homePage(driver);
-        verifiers verifiers = new verifiers(driver);
-        verifiers.waitForPageLoad();
+        actions actions = new actions(driver);
+        actions.waitForPageLoad();
+
+        System.out.println("Setting up departure location ...");
         hp.setDepartureLocation("Kievskaia", true, true, false);
+
+        System.out.println("Setting up destination location ...");
         hp.setDestinationLocation("Kiana", true);
         hp.closeSelectDatesDialog();
-        ((JavascriptExecutor) driver).executeScript("scroll(0,300)");
+
+        System.out.println("Pressing the search button ...");
+        actions.scrollPage(300, driver);
         hp.pressSearchButton();
-        //Assert.assertTrue("Incorrect trains availability message",  hp.getTrainAvailblityMessage());
-        Assert.assertEquals(hp.getTrainAvailblityMessage(), "Incorrect trains availability message");
+
+        System.out.println("Verifying 'No trains in this direction message ...");
+        Assert.assertEquals("Incorrect Message","No trains in this direction", hp.getTrainAvailblityMessage());
     }
 
 

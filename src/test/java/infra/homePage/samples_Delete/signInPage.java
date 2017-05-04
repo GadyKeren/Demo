@@ -1,6 +1,6 @@
-package infra.homePage;
+package infra.homePage.samples_Delete;
 
-import infra.baseTestClass;
+import infra.baseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Created by Kerens on 30/04/2017.
  */
-public class signInPage extends baseTestClass {
+public class signInPage extends baseClass {
 
     private WebDriver driver;
 

@@ -1,4 +1,4 @@
-package infra.homePage;
+package infra.homePage.samples_Delete;
 
 import org.openqa.selenium.WebDriver;
 

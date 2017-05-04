@@ -4,55 +4,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-
 import java.util.concurrent.TimeUnit;
 
-
-/**
- * Created by Kerens on 30/04/2017.
- */
 public class homePage {
+
     protected WebDriver driver;
 
-    //    private By loginLink = By.linkText("Login");
-//    private By loginUserdataForm = By.id("loginUserdataForm");
     private By stationDepartureField = By.cssSelector("input[name=\"station_from\"]");
     private By stationDestinationField = By.cssSelector("input[name=\"station_till\"]");
     private By trainsNotFoundField = By.id("ts_res_not_found");
     private By searchButton = By.cssSelector("button[name=\"search\"]");
-    private By departureKievskaiaFromSelectionList = By.cssSelector("#ui-id-3");
-    private By destinationDebaltseveFromSelectionList = By.cssSelector("#ui-id-5");
     private By datesDialog = By.id("ui-datepicker-div");
+    private By userControlPanelButton = By.cssSelector("a.linkBtn");
 
 
     public homePage(WebDriver driver) {
         this.driver = driver;
-    }
-
-//    public homePage clickLoginBtn() {
-//        System.out.println("clicking on the Login button");
-//        WebElement loginBtnElement=driver.findElement(loginLink);
-//        if(loginBtnElement.isDisplayed()||loginBtnElement.isEnabled())
-//            loginBtnElement.click(); //Need a more elegant way of presenting it...
-//        else System.out.println("Element not found");
-//        return new homePage(driver);
-//    }
-
-
-//    public signInPage clickSignInBtn() {
-//        System.out.println("clicking on sign in button");
-//        WebElement signInBtnElement=driver.findElement(loginLink);
-//        if(signInBtnElement.isDisplayed()||signInBtnElement.isEnabled())
-//            signInBtnElement.click();
-//        else System.out.println("Element not found");
-//        return new signInPage(driver);
-//    }
-
-    public void clickImagesLink() {
-        //It should have a logic to click on images link
-        //And it should navigate to google images page
     }
 
     public String getPageTitle(){
@@ -71,12 +38,6 @@ public class homePage {
             departure.sendKeys(departureLocation);
         }
         if (closeSelectionDropDown) {
-            //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);//Really bad practice!
-            //departure.sendKeys(Keys.ARROW_DOWN);
-            //departure.click();
-            //departure.sendKeys(Keys.ESCAPE);
-            //departure.sendKeys(Keys.RETURN);
-            //clickOnIteminSelectionList(departureKievskaiaFromSelectionList);
             departure.sendKeys(Keys.TAB);
         }
         else if (moveToDestinationField) {
@@ -96,12 +57,6 @@ public class homePage {
             destination.sendKeys(destinationLocationL);
         }
         if (closeSelectionDropDown) {
-            //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);//Really bad practice!
-            //destination.sendKeys(Keys.ARROW_DOWN);
-            //destination.click();
-            //destination.sendKeys(Keys.ESCAPE);
-            //destination.sendKeys(Keys.RETURN);
-            //clickOnIteminSelectionList(destinationDebaltseveFromSelectionList);
             destination.sendKeys(Keys.TAB);
         }
     }
@@ -129,14 +84,23 @@ public class homePage {
 
     public String getTrainAvailblityMessage(){
         WebElement trainAvailabilityMessage = driver.findElement(trainsNotFoundField);
-        return trainAvailabilityMessage.getText();
+        if (trainAvailabilityMessage.isDisplayed()) {
+            return trainAvailabilityMessage.getText();
+        } else {
+            //Bad Practice- need to talk about this. It should be wait for element to be displayed
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            return trainAvailabilityMessage.getText();
+        }
     }
 
     public void clickOnIteminSelectionList(By itemSelected){
         WebElement selectionList = driver.findElement(itemSelected);
         selectionList.click();
     }
-//    public boolean verifyBasePageTitle(String expectedPageTitle ) {
-//        return getPageTitle().contains(expectedPageTitle);
-//    }
+
+    public void userControlPanelButton(WebDriver driver) {
+        WebElement  userCtrlPanelBtn = driver.findElement(userControlPanelButton);
+        userCtrlPanelBtn.click();
+    }
+
 }
