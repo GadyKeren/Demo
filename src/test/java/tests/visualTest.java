@@ -48,9 +48,6 @@ public class visualTest extends baseClass {
 
     @After
     public void cleanUp(){
-        // Abort test in case of an unexpected error.
-        //eyes.abortIfNotClosed();
-        driver.close();
         driver.quit();
     }
 

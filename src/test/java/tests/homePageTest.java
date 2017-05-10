@@ -37,6 +37,7 @@ public class homePageTest extends baseClass {
 
     @Test
     public void verifyNoTrainsOnDirectionFlow(){
+
         System.out.println("Navigating to site ...");
         driver.navigate().to("http://booking.uz.gov.ua/en/ ");
 
@@ -60,6 +61,9 @@ public class homePageTest extends baseClass {
         Assert.assertEquals("Incorrect Message","No trains in this direction", hp.getTrainAvailblityMessage());
     }
 
-
+    @After
+    public void cleanUp(){
+        driver.quit();
+    }
 
 }
