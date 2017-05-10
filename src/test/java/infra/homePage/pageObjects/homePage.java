@@ -98,7 +98,7 @@ public class homePage {
         selectionList.click();
     }
 
-    public void userControlPanelButton(WebDriver driver) {
+    public void pressUserControlPanelButton(WebDriver driver) {
         WebElement  userCtrlPanelBtn = driver.findElement(userControlPanelButton);
         userCtrlPanelBtn.click();
     }

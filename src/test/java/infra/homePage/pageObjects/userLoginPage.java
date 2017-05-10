@@ -11,6 +11,8 @@ public class userLoginPage {
     private By emailField = By.cssSelector("input[name=\"login\"]");
     private By passwordField = By.cssSelector("input[name=\"passwd\"]");
     private By enterButton = By.cssSelector("button.button");
+    private By userLoginEmail = By.cssSelector("#helloUser > span > a");
+    private By loggedInHeaderMessage = By.cssSelector("#helloUser > span");
 
     public userLoginPage(WebDriver driver) {
 
@@ -31,6 +33,14 @@ public class userLoginPage {
             psd.click();
             psd.sendKeys(password);
         }
+    }
+
+    public String getuserLoginEmail(){
+        WebElement userEmail = driver.findElement(userLoginEmail);
+        if (userEmail.isDisplayed()) {
+            return userEmail.getText();
+        }
+        return null;
     }
 
     public void login(){

@@ -8,7 +8,7 @@ import infra.verifiers;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 
-public class HomePageTest extends baseClass {
+public class homePageTest extends baseClass {
 
     private WebDriver driver;
     private Eyes eyes;

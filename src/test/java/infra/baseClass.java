@@ -89,6 +89,11 @@ public class baseClass {
         }
     }
 
+    public static void execCmd(String cmd) throws java.io.IOException {
+        Runtime.getRuntime().exec(cmd);
+
+    }
+
     @After
     public void tearDown() {
         driver.quit();

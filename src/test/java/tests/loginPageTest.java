@@ -5,11 +5,12 @@ import infra.baseClass;
 import infra.homePage.pageObjects.homePage;
 import infra.homePage.pageObjects.userLoginPage;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-public class visualTest extends baseClass {
+public class loginPageTest extends baseClass {
 
     WebDriver driver;
     Eyes eyes;
@@ -26,24 +27,23 @@ public class visualTest extends baseClass {
         System.out.println("Navigating to site ...");
         driver.get("http://booking.uz.gov.ua/en/");
 
+        System.out.println("Press the User Control Button ...");
         homePage hp = new homePage(driver);
         hp.pressUserControlPanelButton(driver);
 
         System.out.println("Setting user Name ...");
         userLoginPage loginPage = new userLoginPage(driver);
-        loginPage.setEmail("JamesBond@gmail.com");
+        loginPage.setEmail("greadinglist@gmail.com");
 
         System.out.println("Setting password ...");
-        loginPage.setPassword("111111");
+        loginPage.setPassword("12345678");
 
         System.out.println("logning in ...");
         loginPage.login();
 
-        // Visual validation point #1
-        eyes.checkWindow("Login Error message");
+        Assert.assertTrue("Wrong Login User Name", loginPage.getuserLoginEmail().equals("greadinglist@gmail.com"));
 
-        // End visual testing. Validate visual correctness.
-        eyes.close();
+
     }
 
     @After
