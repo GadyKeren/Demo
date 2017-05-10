@@ -22,7 +22,32 @@ public class loginPageTest extends baseClass {
     }
 
     @Test
-    public void visualizationExample(){
+    public void headerEmailVerificationAfterLogin(){
+
+        System.out.println("Navigating to site ...");
+        driver.get("http://booking.uz.gov.ua/en/");
+
+
+        System.out.println("Press the User Control Button ...");
+        homePage hp = new homePage(driver);
+        hp.pressUserControlPanelButton(driver);
+
+        System.out.println("Setting user Name ...");
+        userLoginPage loginPage = new userLoginPage(driver);
+        loginPage.setEmail("greadinglist@gmail.com");
+
+        System.out.println("Setting password ...");
+        loginPage.setPassword("12345678");
+
+        System.out.println("login in ...");
+        loginPage.login();
+
+        System.out.println("Verifying correct header user ...");
+        Assert.assertTrue("Wrong Login User Name", loginPage.getuserLoginEmail().equals("greadinglist@gmail.com"));
+    }
+
+    @Test
+    public void profileTabFieldEmailVerificationAfterLogin(){
 
         System.out.println("Navigating to site ...");
         driver.get("http://booking.uz.gov.ua/en/");
@@ -38,14 +63,14 @@ public class loginPageTest extends baseClass {
         System.out.println("Setting password ...");
         loginPage.setPassword("12345678");
 
-        System.out.println("logning in ...");
+        System.out.println("login in ...");
         loginPage.login();
 
-        Assert.assertTrue("Wrong Login User Name", loginPage.getuserLoginEmail().equals("greadinglist@gmail.com"));
+        loginPage.pressProfileTab();
 
-
+        System.out.println("Verifying correct email in Profile Tab email field ...");
+        Assert.assertTrue("Wrong Login User Name", loginPage.getProfileEmail().equals("greadinglist@gmail.com"));
     }
-
     @After
     public void cleanUp(){
         // Abort test in case of an unexpected error.

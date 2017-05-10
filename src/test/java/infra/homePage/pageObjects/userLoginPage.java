@@ -13,6 +13,9 @@ public class userLoginPage {
     private By enterButton = By.cssSelector("button.button");
     private By userLoginEmail = By.cssSelector("#helloUser > span > a");
     private By loggedInHeaderMessage = By.cssSelector("#helloUser > span");
+    private By emailFieldOnProfileTab = By.cssSelector("input[name=\"email\"]");
+    //private By profileTab = By.xpath("//a[@href='http://booking.uz.gov.ua/en/cabinet/profile/']");
+    private By profileTab = By.cssSelector("li > a[href^=\"http://booking.uz.gov.ua/en/cabinet/profile/\"]");
 
     public userLoginPage(WebDriver driver) {
 
@@ -41,6 +44,16 @@ public class userLoginPage {
             return userEmail.getText();
         }
         return null;
+    }
+
+    public void pressProfileTab(){
+        WebElement profTab = driver.findElement(profileTab);
+        profTab.click();
+    }
+
+    public String getProfileEmail(){
+        WebElement profTabEmailField = driver.findElement(emailFieldOnProfileTab);
+        return profTabEmailField.getAttribute("value");
     }
 
     public void login(){
