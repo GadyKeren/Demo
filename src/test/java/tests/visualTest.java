@@ -39,7 +39,7 @@ public class visualTest extends baseClass {
         System.out.println("logning in ...");
         loginPage.login();
 
-        // Visual validation point #1
+        System.out.println("Performing Visual validation ... Login error message");
         eyes.checkWindow("Login Error message");
 
         // End visual testing. Validate visual correctness.

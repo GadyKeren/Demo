@@ -63,7 +63,7 @@ public class baseClass {
         eyes.setApiKey("ZEdZCu103x105Vz4Qu45Gv3rej8tbWWkIQ6isdq8Xf2DPjA110");
         // Start visual testing with browser viewport set to 1024x768.
         // Make sure to use the returned driver from this point on.
-        eyes.open(driver, "Applitools", "Test Web Page", new RectangleSize(800, 600));
+        eyes.open(driver, "Applitools", "Test Web Page", new RectangleSize(1280, 694));
         return eyes;
     }
 
